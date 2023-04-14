@@ -107,11 +107,11 @@ public final class EarlybirdLuceneIndexSegmentData extends EarlybirdIndexSegment
 
   @Override
   protected EarlybirdIndexSegmentAtomicReader doCreateAtomicReader() throws IOException {
-    // EarlybirdSegment creates one single EarlybirdIndexSegmentAtomicReader instance per segment
-    // and caches it, and the cached instance is recreated only when the segment's data changes.
-    // This is why this is a good place to reload all CSFs that should be loaded in RAM. Also, it's
-    // easier and less error-prone to do it here, than trying to track down all places that mutate
-    // the segment data and do it there.
+    /* EarlybirdSegment creates one single EarlybirdIndexSegmentAtomicReader instance per segment
+    and caches it, and the cached instance is recreated only when the segment's data changes.
+    This is why this is a good place to reload all CSFs that should be loaded in RAM. Also, it's
+    easier and less error-prone to do it here, than trying to track down all places that mutate
+    the segment data and do it there. */
     LeafReader reader = getLeafReaderFromOptimizedDirectory(directory);
     for (Schema.FieldInfo fieldInfo : getSchema().getFieldInfos()) {
       // Load CSF into RAM based on configurations in the schema.
